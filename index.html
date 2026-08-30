@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iki1uc · DISpatcher · index (verbunden)</title>
+<style>
+    body {
+        background: #0a0a12;
+        color: #d0d9e6;
+        font-family: Consolas, monospace;
+        padding: 20px;
+    }
+    h1 {
+        text-align: center;
+        letter-spacing: 4px;
+        margin-bottom: 20px;
+        background: linear-gradient(90deg,#ffd700,#00ccff,#ff66ff,#00ff88);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .panel {
+        background: rgba(255,255,255,0.05);
+        padding: 16px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(0,200,255,0.08);
+    }
+    .flex { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0; }
+    label { font-size: 11px; color: #9df; }
+    input {
+        background: #000; color: #0f0; border: 1px solid #0f0;
+        padding: 4px 8px; font-family: monospace; width: 70px;
+    }
+    button {
+        background: #0f0; color: #000; border: none;
+        padding: 6px 14px; font-weight: bold; cursor: pointer; font-family: monospace;
+    }
+    button:hover { background: #0ff; }
+    pre {
+        background: rgba(0,0,0,0.3);
+        padding: 16px;
+        border-radius: 12px;
+        border: 1px solid rgba(0,200,255,0.05);
+        overflow-x: auto;
+        font-size: 13px;
+        line-height: 1.4;
+        white-space: pre-wrap;
+    }
+    .ok { color: #6bffa9; }
+    .err { color: #ff6b8a; }
+</style>
+</head>
+<body>
+
+<h1>iki1uc · DISpatcher</h1>
+
+<div class="panel">
+<pre>
+ID.MODE     = neutral
+ID.CORE     = 243
+ID.ROLE     = PQ‑Root
+ID.STATE    = verbunden
+ID.RUNTIME  = RIR.Core + DQF + XyX + 243
+ID.WHIRL    = WHIRL_PQ
+</pre>
+</div>
+
+<div class="panel">
+    <div class="flex">
+        <label>X:</label><input id="x" type="number" value="3">
+        <label>Y:</label><input id="y" type="number" value="9">
+        <label>Z:</label><input id="z" type="number" value="27">
+        <button id="runBtn">▶ RUN (RIR + DQF/XyX + 243)</button>
+    </div>
+</div>
+
+<div id="output"></div>
+
+<script type="module">
+    import { baseDQF } from "./3.js";
+    import { extendedDQF } from "./81.js";
+    import { XyX } from "./XyX.js";
+    import { stateProxy } from "./243.js";
+    import { RIR } from "./RIR.Core.js";
+
+    const outputEl = document.getElementById("output");
+
+    function show(title, value, isError = false) {
+        const div = document.createElement("div");
+        div.className = "panel";
+        div.innerHTML = `<h3 style="margin:0 0 8px 0;font-size:13px;color:${isError ? '#ff6b8a' : '#00ccff'}">${title}</h3>
+            <pre class="${isError ? 'err' : 'ok'}">${value}</pre>`;
+        outputEl.appendChild(div);
+    }
+
+    function run() {
+        outputEl.innerHTML = "";
+        const x = Number(document.getElementById("x").value);
+        const y = Number(document.getElementById("y").value);
+        const z = Number(document.getElementById("z").value);
+
+        // 1) RIR.Core — Reinheitsprüfung
+        try {
+            const check = RIR.return({ x, y, z });
+            show("RIR.Core · return()", JSON.stringify(check, null, 2));
+        } catch (e) {
+            show("❌ RIR.Core ERROR", e.stack, true);
+        }
+
+        // 2) baseDQF (3.js)
+        try {
+            const dqf = baseDQF(x, y, z);
+            show("baseDQF (3.js)", JSON.stringify(dqf, null, 2));
+        } catch (e) {
+            show("❌ baseDQF ERROR", e.stack, true);
+        }
+
+        // 3) extendedDQF (81.js)
+        try {
+            const dqfx = extendedDQF(x, y, z);
+            show("extendedDQF (81.js)", JSON.stringify(dqfx, null, 2));
+        } catch (e) {
+            show("❌ extendedDQF ERROR", e.stack, true);
+        }
+
+        // 4) XyX — nur relevant/aussagekräftig, wenn x, y oder z = 9
+        try {
+            const xyx = XyX(x, y, z);
+            show("XyX (XyX.js)", JSON.stringify(xyx, null, 2));
+        } catch (e) {
+            show("❌ XyX ERROR", e.stack, true);
+        }
+
+        // 5) 243.js — Proxy/State-Generator (routet automatisch zu XyX bei 9)
+        try {
+            const state = stateProxy[`${x},${y},${z}`];
+            show("stateProxy (243.js)", JSON.stringify(state, null, 2));
+        } catch (e) {
+            show("❌ stateProxy ERROR", e.stack, true);
+        }
+    }
+
+    document.getElementById("runBtn").addEventListener("click", run);
+
+    // Erster Lauf mit den Startwerten
+    run();
+</script>
+
+</body>
+</html>
