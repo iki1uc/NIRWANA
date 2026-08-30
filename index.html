@@ -168,6 +168,10 @@ function updateNEWEDA_LIVE() {
     document.getElementById("lm-neweda-fusion").innerText =
         "FUSION: " + (d.fusion ? "✔" : "✘");
 }
+import { pipelineblitz } from "./pipelineblitz.js";
+
+const result = pipelineblitz(3, 9, 27);
+console.log(result);
 
 document.getElementById("runBtn").addEventListener("click", run);
 run();
