@@ -140,6 +140,34 @@ function run() {
         panel("❌ stateProxy ERROR", e.stack, true);
     }
 }
+function updateNEWEDA_LIVE() {
+    if (!window.RITH_ENGINE || !RITH_ENGINE.tmp.detail) return;
+
+    const rith = RITH_ENGINE.rith;
+    const d = RITH_ENGINE.tmp.detail;
+    const state = NEWEDA_STATE_MACHINE(rith);
+
+    document.getElementById("lm-neweda-state").innerText =
+        "STATE: " + state;
+
+    document.getElementById("lm-neweda-rith").innerText =
+        "RITH: " + rith;
+
+    document.getElementById("lm-neweda-norm").innerText =
+        "8→9‑Norm: " + (d.vector ? "aktiv" : "inaktiv");
+
+    document.getElementById("lm-neweda-raw").innerText =
+        "RAW: " + (d.raw ? "✔" : "✘");
+
+    document.getElementById("lm-neweda-structure").innerText =
+        "STRUCTURE: " + (d.structure ? "✔" : "✘");
+
+    document.getElementById("lm-neweda-vector").innerText =
+        "VECTOR: " + (d.vector ? "✔" : "✘");
+
+    document.getElementById("lm-neweda-fusion").innerText =
+        "FUSION: " + (d.fusion ? "✔" : "✘");
+}
 
 document.getElementById("runBtn").addEventListener("click", run);
 run();
