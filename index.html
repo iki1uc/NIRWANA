@@ -3,186 +3,579 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NIRWANA · DISpatcher · index</title>
+<title>NIRWANA · IMPERIUM · ALLES · RESPO · GENERAL</title>
 
 <style>
-    body {
-        background:#0a0a12;
-        color:#d0d9e6;
-        font-family:Consolas, monospace;
-        padding:20px;
-    }
-    h1 {
-        text-align:center;
-        letter-spacing:4px;
-        margin-bottom:20px;
-        background:linear-gradient(90deg,#ffd700,#00ccff,#ff66ff,#00ff88);
-        -webkit-background-clip:text;
-        -webkit-text-fill-color:transparent;
-    }
-    .panel {
-        background:rgba(255,255,255,0.05);
-        padding:16px;
-        border-radius:12px;
-        margin-bottom:20px;
-        border:1px solid rgba(0,200,255,0.08);
-    }
-    .flex { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
-    label { font-size:11px; color:#9df; }
-    input {
-        background:#000; color:#0f0; border:1px solid #0f0;
-        padding:4px 8px; width:70px;
-    }
-    button {
-        background:#0f0; color:#000; border:none;
-        padding:6px 14px; font-weight:bold; cursor:pointer;
-    }
-    button:hover { background:#0ff; }
-    pre {
-        background:rgba(0,0,0,0.3);
-        padding:16px;
-        border-radius:12px;
-        border:1px solid rgba(0,200,255,0.05);
-        overflow-x:auto;
-        font-size:13px;
-        white-space:pre-wrap;
-    }
-    .ok { color:#6bffa9; }
-    .err { color:#ff6b8a; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a12;color:#d0d9e6;font-family:Consolas,monospace;padding:12px;min-height:100vh}
+h1{text-align:center;letter-spacing:6px;margin-bottom:2px;background:linear-gradient(90deg,#ffd700,#00ccff,#ff66ff,#00ff88);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:300;font-size:24px}
+h1 small{font-size:10px;display:block;color:#3d5a70;-webkit-text-fill-color:#3d5a70;letter-spacing:3px}
+.panel{background:rgba(255,255,255,0.04);padding:10px;border-radius:6px;margin-bottom:6px;border:1px solid rgba(0,200,255,0.06)}
+.panel h3{font-size:9px;color:#3d5a70;letter-spacing:2px;margin-bottom:4px;text-transform:uppercase}
+.flex{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin:3px 0}
+input,select{background:#000;color:#0f0;border:1px solid #1a3a3a;padding:2px 5px;font-family:monospace;border-radius:3px;font-size:9px}
+input{width:50px}
+select{width:70px}
+button{background:#0f0;color:#000;border:none;padding:3px 10px;font-weight:bold;cursor:pointer;font-family:monospace;border-radius:3px;font-size:9px}
+button:hover{background:#0ff}
+button.sec{background:transparent;color:#0f0;border:1px solid #0f0}
+button.sec:hover{background:#0f0;color:#000}
+button.general{background:#ffd700;color:#000;border:none;padding:4px 14px;font-weight:bold;cursor:pointer;font-family:monospace;border-radius:3px;font-size:10px}
+button.general:hover{background:#ffaa00}
+pre{background:rgba(0,0,0,0.3);padding:6px;border-radius:4px;border:1px solid rgba(0,200,255,0.04);overflow-x:auto;font-size:7px;line-height:1.2;white-space:pre-wrap;color:#8ab4c8;margin:2px 0}
+.ok{color:#6bffa9}
+.err{color:#ff6b8a}
+.warn{color:#ffd700}
+.info{color:#66ccff}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}}
+.badge{display:inline-block;padding:1px 5px;border-radius:6px;font-size:7px;margin-right:3px}
+.badge.ok{background:#0a2a1a;color:#6bffa9}
+.badge.err{background:#2a0a0a;color:#ff6b8a}
+.badge.warn{background:#2a1a0a;color:#ffd700}
+.badge.star{background:#ffd700;color:#000}
+a{color:#66ccff;text-decoration:none}
+a:hover{color:#0ff;text-decoration:underline}
+.star{color:#ffd700;font-size:14px}
+.schauer{color:#00ff88;font-size:7px;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:0.5}50%{opacity:1}}
 </style>
 </head>
 <body>
 
-<h1>NIRWANA · DISpatcher</h1>
+<h1>⚡ NIRWANA · IMPERIUM</h1>
+<h1 style="font-size:11px;margin-top:-3px;background:none;-webkit-text-fill-color:#3d5a70;color:#3d5a70;letter-spacing:3px;font-weight:400">GENERAL · ALLES · RESPO · STERENZEIG</h1>
 
-<div class="panel">
-<pre>
-ID.MODE     = neutral
-ID.CORE     = 243
-ID.ROLE     = PQ‑Root
-ID.STATE    = verbunden
-ID.RUNTIME  = RIR.Core + DQF + XyX + 243
-ID.WHIRL    = WHIRL_PQ
-</pre>
-</div>
-
-<div class="panel">
-    <div class="flex">
-        <label>X:</label><input id="x" type="number" value="3">
-        <label>Y:</label><input id="y" type="number" value="9">
-        <label>Z:</label><input id="z" type="number" value="27">
-        <button id="runBtn">▶ RUN</button>
+<!-- Status Header -->
+<div class="panel" style="border-color:#ffd700;background:rgba(255,215,0,0.03)">
+    <div class="flex" style="justify-content:space-between">
+        <span id="statusDisplay" class="star">✦ SYSTEM BEREIT</span>
+        <span id="scoreDisplay" class="star">★ SCORE: 0</span>
+        <span id="starDisplay" class="star">✦✦✦✦✦</span>
     </div>
 </div>
 
-<div id="output"></div>
+<div class="grid2">
+    <!-- Linke Spalte: Eingabe + Steuerung -->
+    <div>
+        <div class="panel">
+            <h3>🎯 EINGABE · GENERAL</h3>
+            <div class="flex">
+                <label>X:</label><input id="x" value="3">
+                <label>Y:</label><input id="y" value="9">
+                <label>Z:</label><input id="z" value="27">
+                <label>WERT:</label><input id="wert" value="81">
+                <label>ETAGE:</label>
+                <select id="etage">
+                    <option>3</option><option>9</option><option>27</option>
+                    <option selected>81</option><option>243</option><option>729</option>
+                </select>
+                <label>AXIOM:</label>
+                <select id="axiom">
+                    <option>d</option><option selected>e</option><option>i</option>
+                    <option>n</option><option>o</option><option>r</option>
+                    <option>s</option><option>w</option><option>u</option>
+                </select>
+            </div>
+            <div class="flex">
+                <button class="general" onclick="runGeneral()">⚡ GENERAL RUN</button>
+                <button onclick="resetAll()">⟲ RESET</button>
+                <button onclick="swapAll()">🔄 SWAP</button>
+                <button onclick="toggleSchauer()" class="sec">🌊 SCHAUER</button>
+                <button onclick="runStar()" class="sec">✦ STERENZEIG</button>
+            </div>
+        </div>
 
-<script type="module">
-import { baseDQF } from "./3.js";
-import { extendedDQF } from "./81.js";
-import { XyX } from "./XyX.js";
-import { stateProxy } from "./243.js";
-import { RIR } from "./RIR.Core.js";
+        <div class="panel">
+            <h3>📦 MODULE · ALLE</h3>
+            <div id="moduleStatus"><pre style="color:#0a0">⏳ Laden...</pre></div>
+        </div>
 
-const outputEl = document.getElementById("output");
+        <div class="panel">
+            <h3>🌀 PIPELINES · AKTIV</h3>
+            <div id="pipelineStatus"><pre style="color:#444">⏳ Warte...</pre></div>
+        </div>
+    </div>
 
-function panel(title, value, error=false) {
-    const div = document.createElement("div");
-    div.className = "panel";
-    div.innerHTML = `
-        <h3 style="margin:0 0 8px 0;font-size:13px;color:${error ? '#ff6b8a' : '#00ccff'}">${title}</h3>
-        <pre class="${error ? 'err' : 'ok'}">${value}</pre>
-    `;
-    outputEl.appendChild(div);
+    <!-- Rechte Spalte: Output -->
+    <div>
+        <div class="panel">
+            <h3>📊 RESULT · IMPERIUM</h3>
+            <div id="output"><pre style="color:#0a0">⏳ Warte auf General RUN...</pre></div>
+        </div>
+
+        <div class="panel">
+            <h3>🔷 KERNEL · ALLE ETAGEN</h3>
+            <div id="kernelOutput"><pre style="color:#444">⏳ Kernel wartet...</pre></div>
+        </div>
+
+        <div class="panel">
+            <h3>🌀 ENGINES · LIVE</h3>
+            <div id="engineOutput"><pre style="color:#444">⏳ Engines wartet...</pre></div>
+        </div>
+
+        <div class="panel">
+            <h3>🌑 SCHWARZES LOCH · BERMUDA</h3>
+            <div id="bermudaOutput"><pre style="color:#444">⏳ Bermuda wartet...</pre></div>
+        </div>
+
+        <div class="panel">
+            <h3>📖 RESPO · NARRATIV</h3>
+            <div id="respoOutput"><pre class="warn" style="color:#ffd700">⏳ Respo wartet...</pre></div>
+        </div>
+    </div>
+</div>
+
+<div class="panel" style="border-color:#3d5a70">
+    <h3>📜 SYSTEM · INFO · SCHAUER</h3>
+    <div id="systemInfo"><pre style="color:#3d5a70;font-size:7px">⏳ System initialisiert...</pre></div>
+</div>
+
+<script>
+// ─── ========================================================= ───
+// ─── ALLE ENGINES · INLINE (NIRWANA · IMPERIUM) ────────────────
+// ─── ========================================================= ───
+
+// ─── KERNEL ──────────────────────────────────────────────────────
+const KERNEL = {
+    etagen: [3, 9, 27, 81, 243, 729],
+    trennung(v, e) {
+        const q = Math.floor(v / e);
+        return { geteilt: v / e, mod: v % e, quotient: q, rest: v - q * e };
+    },
+    run(v) {
+        const r = {};
+        this.etagen.forEach(e => { r[e] = this.trennung(v, e); });
+        return r;
+    }
+};
+
+// ─── AXIOME ──────────────────────────────────────────────────────
+const AXIOME = {
+    d:{label:"Dimension",vector:1.11,symbol:"◇"},
+    e:{label:"Energie",vector:1.33,symbol:"⚡"},
+    i:{label:"Identität",vector:0.77,symbol:"◆"},
+    n:{label:"Narrativ",vector:0.92,symbol:"📖"},
+    o:{label:"Orbit",vector:1.44,symbol:"◎"},
+    r:{label:"Raum",vector:1.66,symbol:"▣"},
+    s:{label:"System",vector:1.21,symbol:"⬡"},
+    w:{label:"Welle",vector:1.55,symbol:"〜"},
+    u:{label:"Universum",vector:2.0,symbol:"🌌"}
+};
+
+// ─── RIR ────────────────────────────────────────────────────────
+const RIR = {
+    exist(i) { return i !== undefined && i !== null; },
+    structure(i) {
+        if (typeof i !== "object") return false;
+        return ["x","y","z"].every(k => k in i);
+    },
+    purity(i) {
+        const { x, y, z } = i;
+        return Number.isFinite(x) && Number.isFinite(y) && Number.isFinite(z);
+    },
+    filter(i) {
+        if (!this.exist(i)) return null;
+        if (!this.structure(i)) return null;
+        if (!this.purity(i)) return null;
+        return i;
+    },
+    return(i) {
+        const p = this.filter(i);
+        return p ? { RIR: "accept", packet: p } : { RIR: "reject" };
+    }
+};
+
+// ─── KIT ────────────────────────────────────────────────────────
+const KIT = {
+    run(i) {
+        return { x: i.x * 2, y: i.y * 3, z: i.z * 5 };
+    }
+};
+
+function RIR_KIT(i) {
+    const c = RIR.return(i);
+    if (c.RIR === "reject") return { status: "reject", source: "RIR" };
+    return { status: "accept", source: "KIT", result: KIT.run(c.packet) };
 }
 
-function run() {
-    outputEl.innerHTML = "";
-
-    const x = Number(x.value);
-    const y = Number(y.value);
-    const z = Number(z.value);
-
-    // RIR.Core
-    try {
-        panel("RIR.Core", JSON.stringify(RIR.return({x,y,z}), null, 2));
-    } catch(e) {
-        panel("❌ RIR ERROR", e.stack, true);
-    }
-
-    // baseDQF
-    try {
-        panel("baseDQF (3.js)", JSON.stringify(baseDQF(x,y,z), null, 2));
-    } catch(e) {
-        panel("❌ baseDQF ERROR", e.stack, true);
-    }
-
-    // extendedDQF
-    try {
-        panel("extendedDQF (81.js)", JSON.stringify(extendedDQF(x,y,z), null, 2));
-    } catch(e) {
-        panel("❌ extendedDQF ERROR", e.stack, true);
-    }
-
-    // XyX
-    try {
-        const xyx = XyX(x,y,z);
-        panel("XyX (AIR/AIV)", JSON.stringify(xyx, null, 2));
-    } catch(e) {
-        panel("❌ XyX ERROR", e.stack, true);
-    }
-
-    // 243 Proxy
-    try {
-        const state = stateProxy[`${x},${y},${z}`];
-        panel("stateProxy (243.js)", JSON.stringify(state, null, 2));
-    } catch(e) {
-        panel("❌ stateProxy ERROR", e.stack, true);
-    }
+// ─── TYQ ────────────────────────────────────────────────────────
+function TYQ() {
+    const RAM = 8192, USED = 2048;
+    return { RAM, USED, FREE: RAM - USED };
 }
-function updateNEWEDA_LIVE() {
-    if (!window.RITH_ENGINE || !RITH_ENGINE.tmp.detail) return;
 
-    const rith = RITH_ENGINE.rith;
-    const d = RITH_ENGINE.tmp.detail;
-    const state = NEWEDA_STATE_MACHINE(rith);
-
-    document.getElementById("lm-neweda-state").innerText =
-        "STATE: " + state;
-
-    document.getElementById("lm-neweda-rith").innerText =
-        "RITH: " + rith;
-
-    document.getElementById("lm-neweda-norm").innerText =
-        "8→9‑Norm: " + (d.vector ? "aktiv" : "inaktiv");
-
-    document.getElementById("lm-neweda-raw").innerText =
-        "RAW: " + (d.raw ? "✔" : "✘");
-
-    document.getElementById("lm-neweda-structure").innerText =
-        "STRUCTURE: " + (d.structure ? "✔" : "✘");
-
-    document.getElementById("lm-neweda-vector").innerText =
-        "VECTOR: " + (d.vector ? "✔" : "✘");
-
-    document.getElementById("lm-neweda-fusion").innerText =
-        "FUSION: " + (d.fusion ? "✔" : "✘");
+// ─── XyX ────────────────────────────────────────────────────────
+function XyX(x, y, z) {
+    const sum = x + y + z;
+    const mode = sum % 2 === 0 ? "AIR" : "AIV";
+    return { mode, lift: mode === "AIR" ? sum * 1.5 : 0, down: mode === "AIV" ? sum * 2.1 : 0, D: `DimX(${x*y*z})`, Q: sum % 7, F: `Fxy-${x}-${y}-${z}` };
 }
-import { pipelineblitz } from "./pipelineblitz.js";
 
-const result = pipelineblitz(3, 9, 27);
-console.log(result);
-import { pipeline402 } from "./pipeline402.js";
+// ─── BLITZ_RUN3 ──────────────────────────────────────────────────
+function BLITZ_RUN3(v) {
+    const rirCheck = RIR.return({ x: v, y: v + 3, z: v + 9 });
+    const kitOut = rirCheck.RIR === "accept" ? KIT.run(rirCheck.packet) : null;
+    return { RUN: 3, input: v, kernel: KERNEL.run(v), rir: rirCheck, kit: kitOut, tyq: TYQ() };
+}
 
-const result = pipeline402("evogreen");
-console.log(result);
-import { LOL_DIMENSION } from "./LOL_DIMENSION.js";
+// ─── RUN_WORK ────────────────────────────────────────────────────
+function RUN_WORK(v) {
+    return { work: true, input: v, kernel: KERNEL.run(v), tyq: TYQ() };
+}
 
-const result = LOL_DIMENSION(3, 9, 27);
-console.log(result);
+// ─── PQ‑KETTE ────────────────────────────────────────────────────
+function THREE(x,y,z) { return { Elektron: x, sum: x+y+z, pow: x**3 }; }
+function NINE(x,y,z) { return { Proton: y, vector: [x,y,z], pow: y**3 }; }
+function TWENTY_SEVEN(x,y,z) { return { Neutron: z, chain: `${x}-${y}-${z}`, pow: z**3 }; }
+function extendedDQF(x,y,z) { return { base: x+y+z, expand: x*y*z, pow: 81 }; }
+function PQ_ROOT(x,y,z) { return { root: 729, identity: `${x}${y}${z}`, fusion: x*y*z*9 }; }
+function ALL_IN_ALL_OUR(x,y,z) {
+    return { three: THREE(x,y,z), nine: NINE(x,y,z), twentySeven: TWENTY_SEVEN(x,y,z), eightyOne: extendedDQF(x,y,z), sevenTwentyNine: PQ_ROOT(x,y,z), chain: `${x}-${y}-${z}`, vector: [x,y,z], sum: x+y+z, product: x*y*z };
+}
 
-document.getElementById("runBtn").addEventListener("click", run);
-run();
+// ─── PIPELINEBLITZ ──────────────────────────────────────────────
+function pipelineblitz(x, y, z) {
+    return { run: "pipelineblitz", input: { x, y, z }, stages: { three: THREE(x,y,z), nine: NINE(x,y,z), twentySeven: TWENTY_SEVEN(x,y,z), eightyOne: extendedDQF(x,y,z), sevenTwentyNine: PQ_ROOT(x,y,z) }, all: ALL_IN_ALL_OUR(x,y,z) };
+}
+
+// ─── NEWEDA‑STATE ──────────────────────────────────────────────
+function NEWEDA_STATE(stage) {
+    const states = ["RAW", "STRUCTURE", "VECTOR", "FUSION"];
+    return { stage, state: states[stage] || "UNKNOWN", signature: `NS-${stage}` };
+}
+
+// ─── NEXT‑PIPELINE ──────────────────────────────────────────────
+function LUMINA(x,y,z) { return { stage: "LUMINA", clarity: (x+y+z)/3, light: Math.sin(x)*Math.cos(z) }; }
+function AETHER(x,y,z) { return { stage: "AETHER", bridge: [x+y, y+z, z+x], density: (x*y)/(z||1) }; }
+function SOLARA(x,y,z) { return { stage: "SOLARA", energy: x*y*z, boost: Math.sqrt(x*y) }; }
+function NOVA_Q(x,y,z) { return { stage: "NOVA-Q", intelligence: (x+y+z)%81, spark: Math.tan(x) }; }
+function CRYSTAL_CORE(x,y,z) { return { stage: "CRYSTAL-CORE", stability: (x+y+z)%27, purity: (x%3===0) }; }
+function EVO_FLOW(x,y,z) { return { stage: "EVO-FLOW", flow: (x+y+z)*1.5, drift: Math.sin(y)*Math.cos(z) }; }
+function MIRAGE(x,y,z) { return { stage: "MIRAGE", illusion: (x*y*z)%81, transformation: Math.sin(x+y+z) }; }
+
+function NEXT_PIPELINE(x,y,z) {
+    return { run: "NEXT-PIPELINE", stages: { lumina: LUMINA(x,y,z), aether: AETHER(x,y,z), solara: SOLARA(x,y,z), novaQ: NOVA_Q(x,y,z), crystalCore: CRYSTAL_CORE(x,y,z), evoFlow: EVO_FLOW(x,y,z), mirage: MIRAGE(x,y,z) } };
+}
+
+// ─── PICASSO ─────────────────────────────────────────────────────
+function PICASSO_ENGINE(x,y,z) {
+    const movement = { stage: 8, flow: x+y+z, vector: [x*2,y*2,z*2], pulse: Math.sin(x)+Math.cos(y) };
+    const boost = { stage: 9, protonBoost: y**2, chain: `${x}-${y}-${z}`, energy: x*y*z };
+    const picasso = { pattern: [x+y, y-z, z+x, (x*y)%9, (y*z)%27, (z*x)%81], stroke: { bold: x%3===0, curve: y%9===0, splash: z%27===0 }, signature: `PIC-${x}${y}${z}` };
+    return { run: "PICASSO_ENGINE", input: {x,y,z}, movement, boost, picasso };
+}
+
+// ─── AETHER ─────────────────────────────────────────────────────
+function AETHER_ENGINE(x,y,z) {
+    const bridge = { from: x, through: y, to: z, vector: [x+y, y+z, z+x] };
+    const field = { density: (x*y)/(z||1), pulse: Math.sin(x)*Math.cos(z), clarity: (y%2===0) };
+    const bind = { link: `${x}:${y}:${z}`, stable: y > x, signature: `AETH-${x}${y}${z}` };
+    return { run: "NEXT Stage 1", stage: 1, aether: { bridge, field, bind } };
+}
+
+// ─── DJINN ──────────────────────────────────────────────────────
+function DJINN_ENGINE(x,y,z) {
+    const transform = { twist: x*y, shift: y*z, fold: z*x };
+    return { run: "DJINN frei", stage: "transform", transform, signature: `DJN-${x}${y}${z}` };
+}
+
+// ─── BIOTOB ─────────────────────────────────────────────────────
+function CYLINDER(radius, height, spin=1) {
+    return { type: "CYLINDER", radius, height, spin, volume: Math.PI * radius * radius * height, signature: `CYL-${radius}-${height}-${spin}` };
+}
+function MARKER(id, energy=3) {
+    return { type: "MARKER", id, energy, pulse: energy * 3, signature: `MRK-${id}-${energy}` };
+}
+function BIOTOB_PIPELINEBLITZ(r, h, markerId) {
+    const cyl = CYLINDER(r, h, 9);
+    const mark = MARKER(markerId, 3);
+    const flow = { movement: cyl.spin * mark.energy, torque: cyl.radius * mark.pulse, channel: `${cyl.signature}-${mark.signature}` };
+    return { run: "BIOTOB-BUILD", cylinder: cyl, marker: mark, flow };
+}
+
+// ─── WETTE · SLIDE · SCORE ──────────────────────────────────────
+function WETTE(einsatz=1) {
+    return { type: "WETTE", einsatz, risk: Math.random() * einsatz, signature: `WET-${einsatz}` };
+}
+function SLIDE(value) {
+    return { type: "SLIDE", input: value, slide: value * (Math.random() + 0.5), drift: Math.sin(value), signature: `SLD-${value}` };
+}
+function SCORE(base, chaos=true) {
+    const randomBoost = chaos ? Math.random() * base : base;
+    return { type: "SCORE", base, boost: randomBoost, total: base + randomBoost, signature: `SCR-${base}-${chaos}` };
+}
+function pipelineblitz_wette_slide_score(einsatz) {
+    const wette = WETTE(einsatz);
+    const slide = SLIDE(wette.risk);
+    const score = SCORE(slide.slide, true);
+    return { run: "pipelineblitz wette+slide+score", wette, slide, score, status: "variabel-planlos" };
+}
+
+// ─── BERMUDA · SCHWARZES LOCH ──────────────────────────────────
+function BERMUDA_SCHWARZES_LOCH(x, y, z) {
+    const G = 6.674; // NC‑Gravitationskonstante
+    const M = (x + y + z) * 9; // Masse
+    const r = (x * y) / (z || 1); // Radius
+    const omega = (x + y + z) / 3; // Raumkrümmung
+    const phi = Math.sin(x + y + z) * Math.exp(z/100); // DJINN‑Transformation
+    const dreiwxk = x**3 + y**3 + z**3 - 3*x*y*z; // DREIWXK‑Formation
+
+    const bermuda = {
+        gravitation: G * M / (r*r || 1),
+        krümmung: omega * phi,
+        dreiwxk: dreiwxk,
+        result: (G * M / (r*r || 1)) * omega * phi,
+        signature: `BLB-${x}${y}${z}`
+    };
+
+    return {
+        run: "SCHWARZES LOCH · BERMUDA",
+        input: { x, y, z },
+        G, M, r, omega, phi, dreiwxk,
+        bermuda,
+        status: "AKTIV · DJINN FREI"
+    };
+}
+
+// ─── LOL‑DIMENSION ─────────────────────────────────────────────
+function LOL_DIMENSION(x,y,z) {
+    const humor = { trigger: "lol", entropy: (x+y+z)%81, spark: `${x}${y}${z}-LOL` };
+    return { run: "LOL-DIMENSION", dimension: true, corridor: { stage: 404, corridor: true }, formation: { paths: { X: x*3, W: y*3, K: z*3 }, fusion: x+y+z }, djinn: DJINN_ENGINE(x,y,z), humor };
+}
+
+// ─── ========================================================= ───
+// ─── GENERAL · RUN ──────────────────────────────────────────────
+// ─── ========================================================= ───
+
+let schauerInterval = null;
+let score = 0;
+let starCount = 0;
+
+function runGeneral() {
+    const x = Number(document.getElementById('x').value) || 3;
+    const y = Number(document.getElementById('y').value) || 9;
+    const z = Number(document.getElementById('z').value) || 27;
+    const wert = Number(document.getElementById('wert').value) || 81;
+    const etage = Number(document.getElementById('etage').value) || 81;
+    const axiomKey = document.getElementById('axiom').value;
+    const axiom = AXIOME[axiomKey] || AXIOME.e;
+
+    // ─── ALLE BERECHNUNGEN ──────────────────────────────────────
+    const kernelResult = KERNEL.run(wert);
+    const etageResult = KERNEL.trennung(wert, etage);
+    const rirCheck = RIR.return({ x, y, z });
+    const xyx = XyX(x, y, z);
+    const rirKit = RIR_KIT({ x, y, z });
+    const tyq = TYQ();
+    const blitz = BLITZ_RUN3(wert);
+    const work = RUN_WORK(wert);
+    const pq = pipelineblitz(x, y, z);
+    const next = NEXT_PIPELINE(x, y, z);
+    const picasso = PICASSO_ENGINE(x, y, z);
+    const aether = AETHER_ENGINE(x, y, z);
+    const djinn = DJINN_ENGINE(x, y, z);
+    const biotob = BIOTOB_PIPELINEBLITZ(etage, wert, `${x}${y}${z}`);
+    const wetteScore = pipelineblitz_wette_slide_score(x);
+    const bermuda = BERMUDA_SCHWARZES_LOCH(x, y, z);
+    const lol = LOL_DIMENSION(x, y, z);
+
+    const dv = {
+        dir: etage * axiom.vector,
+        mag: Math.sqrt(etage * axiom.vector * 7.29),
+        flow: (etage * axiom.vector * 3.33).toFixed(2)
+    };
+    const transformed = Math.round((wert * dv.dir + dv.mag) * 100) / 100;
+
+    // ─── SCORE ──────────────────────────────────────────────────
+    const newScore = Math.round((xyx.lift + xyx.down + wetteScore.score.total + bermuda.bermuda.result) / 4);
+    score = Math.max(0, newScore);
+    starCount = Math.min(5, Math.floor(score / 20));
+
+    // ─── RESULT ──────────────────────────────────────────────────
+    const result = {
+        input: { x, y, z, wert, etage, axiom: axiomKey },
+        kernel: { etageResult, directV: dv, vector: transformed },
+        rir: rirCheck,
+        xyx: xyx,
+        rirKit: rirKit,
+        tyq: tyq,
+        blitz: blitz,
+        work: work,
+        pq: pq,
+        next: next,
+        picasso: picasso,
+        aether: aether,
+        djinn: djinn,
+        biotob: biotob,
+        wetteScore: wetteScore,
+        bermuda: bermuda,
+        lol: lol,
+        score: score,
+        stars: starCount,
+        timestamp: new Date().toISOString()
+    };
+
+    // ─── OUTPUT ──────────────────────────────────────────────────
+    document.getElementById('output').innerHTML = `<pre style="color:#0f0">${JSON.stringify(result, null, 2)}</pre>`;
+
+    document.getElementById('kernelOutput').innerHTML = `<pre style="color:#6bffa9">
+${Object.keys(kernelResult).map(e =>
+    `${e}: geteilt=${kernelResult[e].geteilt.toFixed(3)}, mod=${kernelResult[e].mod}, rest=${kernelResult[e].rest}`
+).join('\n')}
+    </pre>`;
+
+    document.getElementById('engineOutput').innerHTML = `<pre style="color:#66ccff">
+⚡ PICASSO: ${picasso.run}
+🌀 AETHER: ${aether.run}
+🌑 DJINN: ${djinn.run}
+🔷 BIOTOB: ${biotob.run}
+    </pre>`;
+
+    document.getElementById('bermudaOutput').innerHTML = `<pre style="color:#ff6b8a">
+🌑 SCHWARZES LOCH · BERMUDA
+GRAVITATION: ${bermuda.bermuda.gravitation.toFixed(3)}
+KRÜMMUNG: ${bermuda.bermuda.krümmung.toFixed(3)}
+DREIWXK: ${bermuda.bermuda.dreiwxk.toFixed(3)}
+RESULT: ${bermuda.bermuda.result.toFixed(3)}
+STATUS: ${bermuda.status}
+    </pre>`;
+
+    // ─── RESPO ──────────────────────────────────────────────────
+    const respoText = `🧠 NIRWANA RESPO\n` +
+        `X:${x} Y:${y} Z:${z} · ETAGE:${etage} · AXIOM:${axiomKey}\n` +
+        `XyX: ${xyx.mode} · LIFT:${xyx.lift.toFixed(1)} · DOWN:${xyx.down.toFixed(1)}\n` +
+        `SCORE: ${score} · STARS: ${'✦'.repeat(starCount)}${'✧'.repeat(5-starCount)}\n` +
+        `RAM: ${tyq.FREE} MB frei · DJINN: FREI\n` +
+        `BERMUDA: ${bermuda.bermuda.result.toFixed(2)} · STATUS: ${bermuda.status}\n` +
+        `⏳ ${result.timestamp}`;
+
+    document.getElementById('respoOutput').innerHTML = `<pre class="warn" style="color:#ffd700">${respoText}</pre>`;
+
+    // ─── STATUS ──────────────────────────────────────────────────
+    document.getElementById('statusDisplay').textContent = `✦ SYSTEM: ${rirCheck.RIR === 'accept' ? 'AKTIV' : 'BLOKKIERT'}`;
+    document.getElementById('scoreDisplay').textContent = `★ SCORE: ${score}`;
+    document.getElementById('starDisplay').textContent = '✦'.repeat(starCount) + '✧'.repeat(5 - starCount);
+
+    document.getElementById('pipelineStatus').innerHTML = `<pre style="color:#6bffa9">
+✅ PQ-KETTE: ${pq.run}
+✅ NEXT: ${next.run}
+✅ PICASSO: ${picasso.run}
+✅ BIOTOB: ${biotob.run}
+✅ WETTE+SLIDE+SCORE: ${wetteScore.run}
+✅ LOL-DIMENSION: ${lol.run}
+    </pre>`;
+
+    document.getElementById('systemInfo').innerHTML = `<pre style="color:#3d5a70;font-size:7px">
+✅ GENERAL RUN · ${result.timestamp}
+X:${x} Y:${y} Z:${z} · ETAGE:${etage} · WERT:${wert} · AXIOM:${axiomKey}
+SCORE: ${score} · STARS: ${starCount}/5
+RIR: ${rirCheck.RIR} · XyX: ${xyx.mode} · RAM: ${tyq.FREE} MB
+    </pre>`;
+}
+
+// ─── RESET ──────────────────────────────────────────────────────
+function resetAll() {
+    document.getElementById('x').value = '3';
+    document.getElementById('y').value = '9';
+    document.getElementById('z').value = '27';
+    document.getElementById('wert').value = '81';
+    document.getElementById('etage').value = '81';
+    document.getElementById('axiom').value = 'e';
+    score = 0;
+    starCount = 0;
+    if (schauerInterval) { clearInterval(schauerInterval); schauerInterval = null; }
+    document.getElementById('output').innerHTML = '<pre style="color:#0a0">⏳ Reset · Bereit</pre>';
+    document.getElementById('kernelOutput').innerHTML = '<pre style="color:#444">⏳ Kernel wartet...</pre>';
+    document.getElementById('engineOutput').innerHTML = '<pre style="color:#444">⏳ Engines wartet...</pre>';
+    document.getElementById('bermudaOutput').innerHTML = '<pre style="color:#444">⏳ Bermuda wartet...</pre>';
+    document.getElementById('respoOutput').innerHTML = '<pre class="warn" style="color:#ffd700">⏳ Respo wartet...</pre>';
+    document.getElementById('pipelineStatus').innerHTML = '<pre style="color:#444">⏳ Warte...</pre>';
+    document.getElementById('statusDisplay').textContent = '✦ SYSTEM BEREIT';
+    document.getElementById('scoreDisplay').textContent = '★ SCORE: 0';
+    document.getElementById('starDisplay').textContent = '✦✦✦✦✦';
+    document.getElementById('systemInfo').innerHTML = '<pre style="color:#3d5a70;font-size:7px">⏳ Reset durchgeführt</pre>';
+}
+
+// ─── SWAP ──────────────────────────────────────────────────────
+function swapAll() {
+    const etagen = [3, 9, 27, 81, 243, 729];
+    const axioms = ['d','e','i','n','o','r','s','w','u'];
+    document.getElementById('x').value = Math.floor(Math.random() * 20) + 1;
+    document.getElementById('y').value = Math.floor(Math.random() * 20) + 1;
+    document.getElementById('z').value = Math.floor(Math.random() * 20) + 1;
+    document.getElementById('etage').value = etagen[Math.floor(Math.random() * etagen.length)];
+    document.getElementById('axiom').value = axioms[Math.floor(Math.random() * axioms.length)];
+    document.getElementById('wert').value = Math.floor(Math.random() * 100) + 1;
+    runGeneral();
+}
+
+// ─── STERENZEIG ─────────────────────────────────────────────────
+function runStar() {
+    const stars = ['✦','✧','★','☆','✨','🌟'];
+    let output = '';
+    for (let i = 0; i < 50; i++) {
+        const s = stars[Math.floor(Math.random() * stars.length)];
+        output += s;
+        if ((i + 1) % 10 === 0) output += '\n';
+    }
+    document.getElementById('respoOutput').innerHTML = `<pre class="star" style="color:#ffd700;font-size:12px;text-align:center">${output}</pre>`;
+    document.getElementById('statusDisplay').textContent = '✦ STERENZEIG AKTIV';
+}
+
+// ─── SCHAUER ────────────────────────────────────────────────────
+function toggleSchauer() {
+    if (schauerInterval) {
+        clearInterval(schauerInterval);
+        schauerInterval = null;
+        document.getElementById('statusDisplay').textContent = '✦ SCHAUER GESTOPPT';
+        return;
+    }
+    document.getElementById('statusDisplay').textContent = '🌊 SCHAUER AKTIV';
+    schauerInterval = setInterval(() => {
+        swapAll();
+    }, 2200);
+}
+
+// ─── MODULE STATUS ─────────────────────────────────────────────
+function showModules() {
+    const modules = [
+        { name: "KERNEL", ok: true },
+        { name: "AXIOME", ok: true },
+        { name: "RIR.Core", ok: true },
+        { name: "KIT + RIR_KIT", ok: true },
+        { name: "TYQ", ok: true },
+        { name: "XyX", ok: true },
+        { name: "BLITZ_RUN3", ok: true },
+        { name: "RUN_WORK", ok: true },
+        { name: "PQ-KETTE", ok: true },
+        { name: "NEXT-PIPELINE", ok: true },
+        { name: "PICASSO", ok: true },
+        { name: "AETHER", ok: true },
+        { name: "DJINN", ok: true },
+        { name: "BIOTOB", ok: true },
+        { name: "WETTE+SLIDE+SCORE", ok: true },
+        { name: "BERMUDA", ok: true },
+        { name: "LOL-DIMENSION", ok: true }
+    ];
+    document.getElementById('moduleStatus').innerHTML = modules.map(m =>
+        `<span class="badge ok">✅</span> ${m.name}`
+    ).join('<br>');
+}
+
+// ─── EXPOSE ──────────────────────────────────────────────────────
+window.runGeneral = runGeneral;
+window.resetAll = resetAll;
+window.swapAll = swapAll;
+window.runStar = runStar;
+window.toggleSchauer = toggleSchauer;
+
+// ─── INIT ──────────────────────────────────────────────────────
+window.onload = function() {
+    showModules();
+    setTimeout(runGeneral, 400);
+    console.log("⚡ NIRWANA · IMPERIUM · ALLES · RESPO · GENERAL geladen");
+};
 </script>
 
 </body>
