@@ -97,3 +97,35 @@ const RITH_ENGINE = {
 
 window.RITH_ENGINE = RITH_ENGINE;
 RITH_ENGINE.init(); // wo kann ich den nutzen name station
+<div class="panel" id="newedaLiveBox">
+    <h3 style="margin:0 0 8px 0;font-size:13px;color:#ffd700">NEWEDA · LIVE‑MONITOR</h3>
+
+    <div class="live-row">
+        <div class="live-item" id="lm-neweda-state"></div>
+        <div class="live-item" id="lm-neweda-rith"></div>
+        <div class="live-item" id="lm-neweda-norm"></div>
+    </div>
+
+    <div class="live-row">
+        <div class="live-item" id="lm-neweda-raw"></div>
+        <div class="live-item" id="lm-neweda-structure"></div>
+        <div class="live-item" id="lm-neweda-vector"></div>
+        <div class="live-item" id="lm-neweda-fusion"></div>
+    </div>
+</div>
+
+<style>
+    .live-row {
+        display:flex;
+        gap:10px;
+        margin-top:10px;
+    }
+    .live-item {
+        background:#000;
+        padding:10px;
+        border-left:4px solid #ffd700;
+        flex:1;
+        color:#d0d9e6;
+        font-size:12px;
+    }
+</style>
