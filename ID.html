@@ -28,16 +28,21 @@ export function REAL_LIVE_MONITOR(atom) {
 
         <h2>LIVE‑MONITOR</h2>
         <div class="live-row">
-            <div class="live-item" id="lm-elektron"></div>
-            <div class="live-item" id="lm-proton"></div>
-            <div class="live-item" id="lm-neutron"></div>
+            <div class="live-item lm-elektron"></div>
+            <div class="live-item lm-proton"></div>
+            <div class="live-item lm-neutron"></div>
         </div>
     `;
 
+    // ⭐ WICHTIG: Elemente werden im eigenen Container gesucht
+    const el = box.querySelector(".lm-elektron");
+    const pr = box.querySelector(".lm-proton");
+    const ne = box.querySelector(".lm-neutron");
+
     function update() {
-        document.getElementById("lm-elektron").innerText = "Elektron: " + atom.Elektron;
-        document.getElementById("lm-proton").innerText   = "Proton: "   + atom.Proton;
-        document.getElementById("lm-neutron").innerText  = "Neutron: "  + atom.Neutron;
+        el.innerText = "Elektron: " + atom.Elektron;
+        pr.innerText = "Proton: " + atom.Proton;
+        ne.innerText = "Neutron: " + atom.Neutron;
     }
 
     update();
