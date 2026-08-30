@@ -176,6 +176,10 @@ import { pipeline402 } from "./pipeline402.js";
 
 const result = pipeline402("evogreen");
 console.log(result);
+import { LOL_DIMENSION } from "./LOL_DIMENSION.js";
+
+const result = LOL_DIMENSION(3, 9, 27);
+console.log(result);
 
 document.getElementById("runBtn").addEventListener("click", run);
 run();
