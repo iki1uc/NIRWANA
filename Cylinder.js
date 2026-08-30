@@ -1,7 +1,6 @@
-// Cylinder.js
-export function CYLINDER(radius, height, spin = 0) {
+export function CYLINDER(radius, height, spin = 1) {
     return {
-        type: "NC-CYLINDER",
+        type: "CYLINDER",
         radius,
         height,
         spin,
